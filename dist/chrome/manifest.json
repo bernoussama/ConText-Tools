@@ -4,8 +4,7 @@
   "name": "sideklick-extension",
   "description": "An extension template using React and TypeScript. This template includes a content script using Tailwind.css. To see it in action, visit https://extension.js.org.",
   "background": {
-    "service_worker": "background/service_worker.js",
-    "type": "module"
+    "service_worker": "background/service_worker.js"
   },
   "content_scripts": [
     {
@@ -30,10 +29,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "public/*",
-        "/*.json",
-        "/*.js",
-        "/*.css"
+        "public/*"
       ],
       "matches": [
         "<all_urls>"
@@ -41,10 +37,7 @@
     },
     {
       "resources": [
-        "web_accessible_resources/*",
-        "/*.json",
-        "/*.js",
-        "/*.css"
+        "web_accessible_resources/*"
       ],
       "matches": [
         "https://extension.js.org/*"
@@ -52,13 +45,9 @@
     }
   ],
   "permissions": [
-    "scripting",
-    "webRequest",
     "storage",
     "activeTab",
+    "scripting",
     "contextMenus"
-  ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; "
-  }
+  ]
 }

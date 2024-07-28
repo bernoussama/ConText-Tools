@@ -1,33 +1,9 @@
 // import { GoogleGenerativeAI } from "@google/generative-ai";
 // import { GoogleGenerativeAI } from './node_modules/@google/generative-ai/dist/index.mjs';
+import { promptGemini } from "./gemini";
+// import { CustomMenu } from "./menus";
 
 console.log("Hello from the background script!");
-
-// async function promptGemini(systemPrompt: string, userPrompt: string): Promise<string> {
-//     console.log("prompting gemini")
-//     return new Promise((resolve) => {
-//         chrome.storage.sync.get("apiKey", async (result) => {
-//             const apiKey = result.apiKey;
-//             if (!apiKey) {
-//                 console.error("API key is not set");
-//                 resolve(""); // Return empty string if no API key
-//                 return;
-//             }
-
-//             const genAI = new GoogleGenerativeAI(apiKey);
-//             const model = genAI.getGenerativeModel({
-//                 model: "gemini-1.5-flash",
-//                 systemInstruction: systemPrompt,
-//             });
-
-//             const res = await model.generateContent(userPrompt);
-//             const response = await res.response;
-//             const text = response.text();
-//             console.log(`gemini response: ${text}`);
-//             resolve(text); // Resolve with the generated text
-//         });
-//     });
-// }
 
 const builtinMenus = [
 	{ id: "uppercase", title: "Uppercase", function: uppercaseSelectedText },
@@ -39,32 +15,10 @@ const builtinMenus = [
 
 let customMenus: CustomMenu[] = [];
 
-class CustomMenu {
-	id: string;
-	title: string;
-	prompt: string;
-	function: () => Promise<void>; // Change 'function' to 'func' and specify the type
-
-	constructor(id: string, title: string, prompt: string) {
-		this.id = id;
-		this.title = title;
-		this.prompt = prompt;
-		this.function = this.executeFunction;
-	}
-
-	async executeFunction() {
-		const selectedText = window.getSelection()?.toString() || "";
-		const systemPrompt = `You are a writing assistant, you are given a text and you have to ${this.prompt} in the same language as the input and reply with ONLY the fixed text`;
-		console.log(`calling prompt gemini with custom prompt`);
-		const response = await promptGemini(systemPrompt, selectedText);
-		document.execCommand("insertText", false, response);
-	}
-}
-
 chrome.runtime.onInstalled.addListener((details) => {
 	if (details.reason !== "install" && details.reason !== "update") return;
 	chrome.contextMenus.create({
-		id: "sideClickParent",
+		id: "sideKlickParent",
 		title: "SideKlickCrxjs",
 		contexts: ["selection"],
 	});
@@ -72,14 +26,15 @@ chrome.runtime.onInstalled.addListener((details) => {
 	builtinMenus.forEach((menu) => {
 		chrome.contextMenus.create({
 			id: menu.id,
-			parentId: "sideClickParent",
+			parentId: "sideKlickParent",
 			title: menu.title,
 			contexts: ["selection"],
 		});
 	});
 });
+chrome.runtime.onStartup(() => {});
 
-chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+chrome.contextMenus.onClicked.addListener((info, tab) => {
 	const menuItem =
 		builtinMenus.find((menu) => menu.id === info.menuItemId) ||
 		customMenus.find((menu) => menu.id === info.menuItemId);
@@ -186,46 +141,76 @@ async function fixGrammar() {
 	document.execCommand("insertText", false, response);
 }
 
-async function promptGemini(systemPrompt: string, selectedText: string) {
-	console.log(`prompting gemini`);
-	const apiKey = await chrome.storage.local.get("apiKey");
-	if (!apiKey) {
-		console.error("API key is not set");
-		return;
+class CustomMenu {
+	id: string;
+	title: string;
+	// prompt: string;
+	systemPrompt: string;
+
+	constructor(id: string, title: string, prompt: string) {
+		this.id = id;
+		this.title = title;
+		// this.prompt = prompt;
+		this.systemPrompt = `You are a writing assistant, you are given a text and you have to ${prompt} in the same language as the input and reply with ONLY the fixed text`;
 	}
-	// Make the request to the Gemini API
-	const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-	const data = {
-		system_instruction: {
-			parts: {
-				text: systemPrompt,
-			},
-		},
-		contents: [
-			{
-				parts: [
+
+	async function(): Promise<void> {
+		const selectedText = window.getSelection()?.toString() || "";
+		// const systemPrompt = `You are a writing assistant, you are given a text and you have to ${this.prompt} in the same language as the input and reply with ONLY the fixed text`;
+		console.log(`system prompt: ${this.systemPrompt}`);
+		// const response = await promptGemini(systemPrompt, selectedText);
+
+		// Get the API key from storage
+		chrome.storage.sync.get("apiKey", async (result) => {
+			const apiKey = result.apiKey;
+			if (!apiKey) {
+				console.error("API key is not set");
+				return;
+			}
+
+			// Make the request to the Gemini API
+			const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+			const data = {
+				system_instruction: {
+					parts: {
+						text: this.systemPrompt,
+					},
+				},
+				safetySettings: [{ category: 7, threshold: 4 }],
+				contents: [
 					{
-						text: `${selectedText}`,
+						parts: [
+							{
+								text: `${selectedText}`,
+							},
+						],
 					},
 				],
-			},
-		],
-	};
+			};
 
-	let modifiedText;
-	try {
-		const response = await fetch(url, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
+			let modifiedText: string | undefined = selectedText;
+			try {
+				const response = await fetch(url, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(data),
+				});
+				const result = await response.json();
+				console.log(result);
+				modifiedText = result.candidates[0].content.parts[0].text.trim();
+			} catch (error) {
+				console.error("Error prompting Gemini:", error);
+			}
+
+			try {
+				document.execCommand("insertText", false, modifiedText);
+			} catch (error) {
+				console.error("Error modifying text:", error);
+			}
 		});
-		const result = await response.json();
-		modifiedText = result.candidates[0].content.parts[0].text.trim();
-		return modifiedText;
-	} catch (error) {
-		console.error("Error prompting Gemini:", error);
+		// document.execCommand("insertText", false, response);
 	}
 }
 
@@ -235,13 +220,15 @@ const moreProfessional = new CustomMenu(
 	"make it more professional",
 );
 
-chrome.contextMenus.update("sideClickParent", {}, () => {
-	customMenus.forEach((menu) => {
-		chrome.contextMenus.create({
-			id: menu.id,
-			// parentId: "sideClickParent",
-			title: menu.title,
-			contexts: ["selection"],
-		});
+customMenus.push(moreProfessional);
+
+// chrome.contextMenus.update("sideClickParent", {}, () => {
+customMenus.forEach((menu) => {
+	chrome.contextMenus.create({
+		id: menu.id,
+		// parentId: "sideKlickParent",
+		title: menu.title,
+		contexts: ["selection"],
 	});
 });
+// });
