@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://extension.js.org/*"
+        "<all_urls>"
       ],
       "js": [
         "content_scripts/content-0.js"
@@ -29,25 +29,24 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "public/*"
+        "public/*",
+        "web_accessible_resources/*",
+        "/*.json",
+        "/*.js",
+        "/*.css"
       ],
       "matches": [
         "<all_urls>"
       ]
-    },
-    {
-      "resources": [
-        "web_accessible_resources/*"
-      ],
-      "matches": [
-        "https://extension.js.org/*"
-      ]
     }
   ],
   "permissions": [
+    "scripting",
     "storage",
     "activeTab",
-    "scripting",
     "contextMenus"
-  ]
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; "
+  }
 }

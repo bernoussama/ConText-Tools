@@ -8,8 +8,8 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["https://extension.js.org/*"],
-			"js": ["./content/content.tsx"]
+			"matches": ["<all_urls>"],
+			"js": ["./content/content.ts"]
 		}
 	],
 	"action": {

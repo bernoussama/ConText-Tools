@@ -22,23 +22,23 @@ document.querySelector("#app").innerHTML = /*html*/ `
 
 // Toggle password visibility
 document.getElementById("togglePassword").addEventListener("click", () => {
-  const passwordInput = document.getElementById("apiKey");
-  passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+	const passwordInput = document.getElementById("apiKey");
+	passwordInput.type = passwordInput.type === "password" ? "text" : "password";
 });
 
 // Save the API key
 document.getElementById("saveButton").addEventListener("click", () => {
-  const apiKey = document.getElementById("apiKey").value;
-  chrome.storage.sync.set({ apiKey }, () => {
-    alert("API key saved");
-  });
+	const apiKey = document.getElementById("apiKey").value;
+	chrome.storage.local.set({ apiKey }, () => {
+		alert("API key saved");
+	});
 });
 
 // Load the API key if it exists
-chrome.storage.sync.get("apiKey", (result) => {
-  if (result.apiKey) {
-    document.getElementById("apiKey").value = result.apiKey;
-  }
+chrome.storage.local.get("apiKey", (result) => {
+	if (result.apiKey) {
+		document.getElementById("apiKey").value = result.apiKey;
+	}
 });
 
 // chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -47,3 +47,17 @@ chrome.storage.sync.get("apiKey", (result) => {
 //   } else if (request.action === "insertText") {
 //   }
 // });
+
+document.getElementById("addButton").addEventListener("click", () => {
+	(async () => {
+		const response = await chrome.runtime.sendMessage({
+			id: "hello",
+			title: "title",
+			prompt: "do nothing",
+		});
+		console.log(response);
+		if (response.status == "success") {
+			alert(`action title created succesfully`);
+		}
+	})();
+});

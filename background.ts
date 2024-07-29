@@ -1,15 +1,16 @@
 // import { GoogleGenerativeAI } from "@google/generative-ai";
 // import { GoogleGenerativeAI } from './node_modules/@google/generative-ai/dist/index.mjs';
-import { promptGemini } from "./gemini";
+// import { promptGemini } from "./gemini";
 // import { CustomMenu } from "./menus";
 
 console.log("Hello from the background script!");
 
 const builtinMenus = [
-	{ id: "uppercase", title: "Uppercase", function: uppercaseSelectedText },
-	{ id: "lowercase", title: "Lowercase", function: lowercaseSelectedText },
-	{ id: "capitalize", title: "Capitalize", function: capitalizeSelectedText },
-	{ id: "fixTypos", title: "Fix Typos", function: fixTypos },
+	{ id: "uppercase", title: "Uppercase" },
+	{ id: "lowercase", title: "Lowercase" },
+	{ id: "capitalize", title: "Capitalize" },
+	{ id: "morePro", title: "more professional" },
+	{ id: "fixTypos", title: "Fix Typos" },
 	{ id: "fixGrammar", title: "Fix Grammar", function: fixGrammar },
 ];
 
@@ -32,46 +33,44 @@ chrome.runtime.onInstalled.addListener((details) => {
 		});
 	});
 });
-chrome.runtime.onStartup(() => {});
+// chrome.runtime.onStartup(() => {});
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
 	const menuItem =
 		builtinMenus.find((menu) => menu.id === info.menuItemId) ||
 		customMenus.find((menu) => menu.id === info.menuItemId);
-	if (menuItem && menuItem.function) {
-		try {
-			if (tab && tab.id !== undefined) {
-				// Ensure tab.id is defined
-				chrome.scripting.executeScript({
-					target: { tabId: tab.id },
-					func: menuItem.function, // Change 'function' to 'func'
+	if (menuItem) {
+		if (tab && tab.id !== undefined) {
+			(async () => {
+				const [tab] = await chrome.tabs.query({
+					active: true,
+					lastFocusedWindow: true,
 				});
-			} else {
-				console.error("Tab ID is undefined");
-			}
-		} catch (error) {
-			console.error("Error executing function:", error);
+				const response = await chrome.tabs.sendMessage(tab.id || 0, {
+					menuId: menuItem.id,
+				});
+				// do something with response here, not outside the function
+				console.log(response);
+			})();
 		}
 	}
 });
-
-async function uppercaseSelectedText() {
-	const selectedText = window.getSelection()?.toString();
-	document.execCommand("insertText", false, selectedText?.toUpperCase());
-}
-
-async function lowercaseSelectedText() {
-	const selectedText = window.getSelection()?.toString();
-	document.execCommand("insertText", false, selectedText?.toLowerCase());
-}
-
-async function capitalizeSelectedText() {
-	const selectedText = window.getSelection()?.toString();
-	const replacement =
-		(selectedText?.charAt(0).toUpperCase() ?? "") +
-		(selectedText?.slice(1).toLowerCase() ?? "");
-	document.execCommand("insertText", false, replacement);
-}
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+	console.log(
+		sender.tab
+			? "from a content script:" + sender.tab.url
+			: "from the extension",
+	);
+	if (request.id && request.title && request.prompt) {
+		chrome.contextMenus.create({
+			id: request.id,
+			parentId: "sideKlickParent",
+			title: request.title,
+			contexts: ["selection"],
+		});
+		sendResponse({ status: "success" });
+	}
+});
 
 async function fixTypos() {
 	const selectedText = window.getSelection()?.toString();
@@ -137,8 +136,14 @@ async function fixGrammar() {
 
 	console.log(`calling prompt gemini`);
 
-	const response = (await promptGemini(systemPrompt, selectedText || "")) || ""; // Ensure response is a string
-	document.execCommand("insertText", false, response);
+	// const response = (await promptGemini(systemPrompt, selectedText || "")) || ""; // Ensure response is a string
+	// (async () => {
+	//   const response = await chrome.runtime.sendMessage({greeting: "hello"});
+	//   // do something with response here, not outside the function
+	//   console.log(response);
+	// })();
+
+	// document.execCommand("insertText", false, response);
 }
 
 class CustomMenu {
@@ -214,21 +219,21 @@ class CustomMenu {
 	}
 }
 
-const moreProfessional = new CustomMenu(
-	"morePro",
-	"more professional",
-	"make it more professional",
-);
+// const moreProfessional = new CustomMenu(
+// 	"morePro",
+// 	"more professional",
+// 	"make it more professional",
+// );
 
-customMenus.push(moreProfessional);
+// customMenus.push(moreProfessional);
 
 // chrome.contextMenus.update("sideClickParent", {}, () => {
-customMenus.forEach((menu) => {
-	chrome.contextMenus.create({
-		id: menu.id,
-		// parentId: "sideKlickParent",
-		title: menu.title,
-		contexts: ["selection"],
-	});
-});
+// customMenus.forEach((menu) => {
+// 	chrome.contextMenus.create({
+// 		id: menu.id,
+// 		// parentId: "sideKlickParent",
+// 		title: menu.title,
+// 		contexts: ["selection"],
+// 	});
+// });
 // });
