@@ -12,10 +12,10 @@ export async function promptGemini(
 	console.log(`system prompt: ${systemPrompt}`);
 	return new Promise((resolve) => {
 		chrome.storage.local.get("apiKey", async (result) => {
-			let apiKey: string = result.apiKey;
+			const apiKey: string = result.apiKey;
 			if (!apiKey) {
 				console.error("API key is not set");
-				resolve(""); // Return empty string if no API key
+				// resolve(""); // Return empty string if no API key
 				return;
 				// apiKey = "AIzaSyBRtKqYoFeK23QwpYjDaRgZ_lH7Mlnu4Ro";
 			}

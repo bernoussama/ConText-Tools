@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "version": "1.0",
-  "name": "sideklick-extension",
+  "name": "ConText tools",
   "description": "An extension template using React and TypeScript. This template includes a content script using Tailwind.css. To see it in action, visit https://extension.js.org.",
   "background": {
     "service_worker": "background/service_worker.js"

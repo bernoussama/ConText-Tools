@@ -1,20 +1,23 @@
 {
-  "devDependencies": {
-    "@google/generative-ai": "^0.16.0",
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.5",
-    "extension": "latest",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "tailwindcss": "^3.4.1",
-    "typescript": "5.3.3"
-  },
-  "scripts": {
-    "dev": "extension dev",
-    "start": "extension start",
-    "build": "extension build"
-  },
-  "name": "sideklick-extension",
-  "private": true,
-  "version": "0.0.0"
+	"devDependencies": {
+		"@google/generative-ai": "^0.16.0",
+		"@tailwindcss/typography": "^0.5.13",
+		"@types/react": "^18.0.9",
+		"@types/react-dom": "^18.0.5",
+		"daisyui": "^4.12.10",
+		"extension": "latest",
+		"react": "^18.1.0",
+		"react-dom": "^18.1.0",
+		"tailwindcss": "^3.4.1",
+		"typescript": "5.3.3"
+	},
+	"scripts": {
+		"dev": "extension dev",
+		"start": "extension start",
+		"build": "extension build",
+		"style": "tailwindcss -i ./input.css -o output.css --watch"
+	},
+	"name": "sideklick-extension",
+	"private": true,
+	"version": "0.0.0"
 }

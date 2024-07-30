@@ -10,8 +10,8 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Action: () => (/* binding */ Action),
-/* harmony export */   CustomAction: () => (/* binding */ CustomAction)
+/* harmony export */   CustomTool: () => (/* binding */ CustomTool),
+/* harmony export */   Tool: () => (/* binding */ Tool)
 /* harmony export */ });
 /* harmony import */ var _gemini__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gemini */ "./content/gemini.ts");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
 
-class Action {
+class Tool {
   modifyText(selectedText) {
     // Default implementation (if needed)
     return Promise.resolve(selectedText);
@@ -29,10 +29,10 @@ class Action {
     this.title = title;
   }
 }
-class CustomAction extends Action {
+class CustomTool extends Tool {
   constructor(id, title, systemPrompt) {
     super(id, title);
-    this.systemPrompt = `You are a writing assistant that do not use markdown, you are given a text and you have to ${systemPrompt} in the same language as the input and reply with ONLY the fixed plain text`;
+    this.systemPrompt = `You are a writing assistant that DO NOT USE MARKDOWN, you are given a text and you have to ${systemPrompt} as it is verbatim in the same language as the input and reply with ONLY the fixed plain text`;
   }
   async modifyText(selectedText) {
     return (0,_gemini__WEBPACK_IMPORTED_MODULE_0__.promptGemini)(this.systemPrompt, selectedText).then(modifiedText => {
@@ -88,27 +88,30 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
 
-console.log("hello from content");
-const moreProfessional = new _actions__WEBPACK_IMPORTED_MODULE_0__.CustomAction("morePro", "more professional", "make it more professional");
-const fixTypos = new _actions__WEBPACK_IMPORTED_MODULE_0__.CustomAction("fixTypos", "Fix typos", "fix typos and grammar");
-let actions = [];
-const upperCaseText = new _actions__WEBPACK_IMPORTED_MODULE_0__.Action("uppercase", "Upppercase");
+const tools = [];
+const moreProfessional = new _actions__WEBPACK_IMPORTED_MODULE_0__.CustomTool("morePro", "more professional", "make it more professional");
+const fixTypos = new _actions__WEBPACK_IMPORTED_MODULE_0__.CustomTool("fixTypos", "Fix typos", "fix typos and grammar");
+const upperCaseText = new _actions__WEBPACK_IMPORTED_MODULE_0__.Tool("uppercase", "Upppercase");
 upperCaseText.modifyText = selectedText => {
   return selectedText.toUpperCase();
 };
-const lowerCaseText = new _actions__WEBPACK_IMPORTED_MODULE_0__.Action("lowercase", "Lowercase");
+const lowerCaseText = new _actions__WEBPACK_IMPORTED_MODULE_0__.Tool("lowercase", "Lowercase");
 lowerCaseText.modifyText = selectedText => {
   return selectedText.toLowerCase();
 };
-const capitalizeText = new _actions__WEBPACK_IMPORTED_MODULE_0__.Action("capitalize", "Capitalize");
+const capitalizeText = new _actions__WEBPACK_IMPORTED_MODULE_0__.Tool("capitalize", "Capitalize");
 capitalizeText.modifyText = selectedText => {
   return selectedText.charAt(0).toUpperCase() + selectedText.slice(1).toLowerCase();
 };
-actions.push(moreProfessional, upperCaseText, lowerCaseText, capitalizeText, fixTypos);
-chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
-  console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
+tools.push(upperCaseText, lowerCaseText, capitalizeText);
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+  console.log(sender.tab ? `from a content script:${sender.tab.url}` : "from the extension");
   if (request.menuId) {
-    const action = actions.find(menu => menu.id === request.menuId);
+    // await getTools();
+    let action = tools.find(menu => menu.id === request.menuId);
+    if (!action) {
+      action = new _actions__WEBPACK_IMPORTED_MODULE_0__.CustomTool(request.menuID, request.menuTitle, request.menuPrompt);
+    }
     console.log(request.menuId);
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
@@ -182,10 +185,10 @@ async function promptGemini(systemPrompt, userPrompt) {
   console.log(`system prompt: ${systemPrompt}`);
   return new Promise(resolve => {
     chrome.storage.local.get("apiKey", async result => {
-      let apiKey = result.apiKey;
+      const apiKey = result.apiKey;
       if (!apiKey) {
         console.error("API key is not set");
-        resolve(""); // Return empty string if no API key
+        // resolve(""); // Return empty string if no API key
         return;
         // apiKey = "AIzaSyBRtKqYoFeK23QwpYjDaRgZ_lH7Mlnu4Ro";
       }
@@ -13407,7 +13410,7 @@ class GoogleGenerativeAI {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("b6cccaa73171533f9b2e")
+/******/ 		__webpack_require__.h = () => ("272633e0a3bf177a2db8")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
