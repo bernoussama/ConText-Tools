@@ -59,33 +59,9 @@ export default function Tools() {
 					>
 						<div className="card-body items-center text-center">
 							<h2 className="card-title">{item.title}</h2>
-							{/* <div className="card-actions justify-end">
-								<button
-									type="button"
-									onClick={() => deleteItem(item.id)}
-									className="btn btn-primary"
-								>
-									Delete{" "}
-								</button>
-							</div> */}
 						</div>
 					</div>
 				))}
-
-				{/* <div className="flex-shrink-0 relative overflow-hidden card bg-primary shadow-xl m-2 w-2/5">
-					<div className="card-body items-center text-center">
-						<h2 className="card-title">Add</h2>
-					</div>
-				</div> */}
-
-				{/* <button
-					id="addButton"
-					type="button"
-					className="btn w-full"
-					onClick={addMenu}
-				>
-					Add
-				</button> */}
 			</div>
 		</div>
 	);

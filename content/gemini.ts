@@ -17,7 +17,6 @@ export async function promptGemini(
 				console.error("API key is not set");
 				// resolve(""); // Return empty string if no API key
 				return;
-				// apiKey = "AIzaSyBRtKqYoFeK23QwpYjDaRgZ_lH7Mlnu4Ro";
 			}
 			const safetySettings = [
 				{

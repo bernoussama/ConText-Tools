@@ -30,10 +30,7 @@
     {
       "resources": [
         "public/*",
-        "web_accessible_resources/*",
-        "/*.json",
-        "/*.js",
-        "/*.css"
+        "web_accessible_resources/*"
       ],
       "matches": [
         "<all_urls>"
@@ -41,12 +38,9 @@
     }
   ],
   "permissions": [
-    "scripting",
     "storage",
     "activeTab",
+    "scripting",
     "contextMenus"
-  ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; "
-  }
+  ]
 }
