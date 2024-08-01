@@ -96,15 +96,15 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 	if (details.reason !== "install" && details.reason !== "update") return;
 	chrome.contextMenus.create({
-		id: "sideKlickParent",
-		title: "SideKlickCrxjs",
+		id: "ConTextParent",
+		title: "ConText Tools",
 		contexts: ["selection"],
 	});
 
 	for (const tool of stringTools) {
 		chrome.contextMenus.create({
 			id: tool.id,
-			parentId: "sideKlickParent",
+			parentId: "ConTextParent",
 			title: tool.title,
 			contexts: ["selection"],
 		});
@@ -112,7 +112,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 	for (const tool of builtinTools) {
 		chrome.contextMenus.create({
 			id: tool.id,
-			parentId: "sideKlickParent",
+			parentId: "ConTextParent",
 			title: tool.title,
 			contexts: ["selection"],
 		});
@@ -165,7 +165,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.id && request.title && request.prompt) {
 		chrome.contextMenus.create({
 			id: request.id,
-			parentId: "sideKlickParent",
+			parentId: "ConTextParent",
 			title: request.title,
 			contexts: ["selection"],
 		});

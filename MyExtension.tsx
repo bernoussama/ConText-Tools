@@ -21,7 +21,7 @@ export default function MyExtension() {
 		<div className="w-full m-0">
 			<header className="bg-gray-100 py-4 w-full">
 				<div className="mx-auto flex justify-between items-center px-4">
-					<h1 className="text-2xl font-bold text-neutral">Writing Tools</h1>
+					<h1 className="text-2xl font-bold text-neutral">ConText Tools</h1>
 				</div>
 			</header>
 			<div className="flex w-full flex-col items-center">
