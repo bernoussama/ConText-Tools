@@ -87,7 +87,7 @@ export default function MyExtension() {
 				</div>
 				<div className="divider" />
 				{/* <CustomMenus /> */}
-				<Tools />
+				{/* <Tools /> */}
 			</div>
 		</div>
 	);

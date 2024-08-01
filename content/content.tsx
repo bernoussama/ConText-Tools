@@ -1,5 +1,39 @@
+import ReactDOM from "react-dom/client";
+// import ToolTip from "./ToolTip"; // Ensure ToolTip is a React component
 import { Tool, CustomTool } from "./actions";
 import { promptGemini } from "./gemini";
+import ContentApp from "./ContentApp";
+import "./content.css";
+import "../output.css";
+
+setTimeout(initial, 1000);
+
+function initial() {
+	// Create a new div element and append it to the document's body
+	const rootDiv = document.createElement("div");
+	rootDiv.id = "extension-root";
+	document.body.appendChild(rootDiv);
+	const root = ReactDOM.createRoot(rootDiv);
+	root.render(<ContentApp />);
+
+	// onselectionchange version
+	document.onselectionchange = (event) => {
+		console.log(window.getSelection()?.toString());
+		const selectedText = document.getSelection()?.toString();
+		if (selectedText) {
+			const selection = document.getSelection();
+			console.log(selection);
+			const range = selection?.getRangeAt(0);
+			console.log(range);
+			if (range) {
+				console.log(range);
+			}
+		}
+	};
+
+	// root.render(<ToolTip />);
+	// root.render(<ContentApp />)
+}
 
 const tools: Tool[] = [];
 

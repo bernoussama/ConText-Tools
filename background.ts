@@ -172,3 +172,34 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		sendResponse({ status: "success" });
 	}
 });
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+	console.log(sender);
+	let resp: any;
+	if (request.msg === "getTools") {
+		console.log(`got ${request.msg}`);
+		const actions: { title: string; prompt: string; id: string | number }[] =
+			[];
+		const dbRequest = indexedDB.open("actions");
+		dbRequest.onerror = (event) => {
+			console.error("Error loading database.");
+		};
+		dbRequest.onsuccess = (event) => {
+			console.log("db request success");
+			const db = dbRequest.result;
+			const objectStore = db.transaction("actions").objectStore("actions");
+			objectStore.openCursor().onsuccess = (event) => {
+				const cursor = (event.target as IDBRequest).result;
+				if (cursor) {
+					console.log(cursor.value);
+					const { title, prompt, id } = cursor.value;
+					actions.push({ title, prompt, id });
+					cursor.continue(); // Continue to the next cursor
+				} else {
+					console.log(actions);
+					sendResponse({ tools: JSON.stringify(actions) });
+				}
+			};
+		};
+	}
+});
