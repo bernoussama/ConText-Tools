@@ -5,13 +5,11 @@ console.log("Hello from the background script!");
 class CustomMenu {
 	id: string;
 	title: string;
-	// prompt: string;
 	systemPrompt: string;
 
 	constructor(id: string, title: string, prompt: string) {
 		this.id = id;
 		this.title = title;
-		// this.prompt = prompt;
 		this.systemPrompt = `You are a writing assistant, you are given a text and you have to ${prompt} in the same language as the input and reply with ONLY the fixed text`;
 	}
 }
@@ -71,9 +69,7 @@ const builtinTools: Tool[] = [
 ];
 
 chrome.runtime.onInstalled.addListener((details) => {
-	console.log("onInstalled triggered");
 	const request = indexedDB.open("actions");
-	console.log("database opened");
 	let db: IDBDatabase;
 
 	request.onupgradeneeded = () => {
@@ -157,11 +153,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 // create custom tool
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	console.log(
-		sender.tab
-			? `from a content script:${sender.tab.url}`
-			: "from the extension",
-	);
 	if (request.id && request.title && request.prompt) {
 		chrome.contextMenus.create({
 			id: request.id,
@@ -172,34 +163,38 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		sendResponse({ status: "success" });
 	}
 });
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	console.log(sender);
-	let resp: any;
-	if (request.msg === "getTools") {
-		console.log(`got ${request.msg}`);
-		const actions: { title: string; prompt: string; id: string | number }[] =
-			[];
-		const dbRequest = indexedDB.open("actions");
-		dbRequest.onerror = (event) => {
-			console.error("Error loading database.");
-		};
-		dbRequest.onsuccess = (event) => {
-			console.log("db request success");
-			const db = dbRequest.result;
-			const objectStore = db.transaction("actions").objectStore("actions");
-			objectStore.openCursor().onsuccess = (event) => {
-				const cursor = (event.target as IDBRequest).result;
-				if (cursor) {
-					console.log(cursor.value);
-					const { title, prompt, id } = cursor.value;
-					actions.push({ title, prompt, id });
-					cursor.continue(); // Continue to the next cursor
-				} else {
-					console.log(actions);
-					sendResponse({ tools: JSON.stringify(actions) });
-				}
-			};
-		};
+chrome.runtime.onConnect.addListener((port) => {
+	console.assert(port.name === "tools");
+	if (port.name === "tools") {
+		port.onMessage.addListener((msg) => {
+			if (msg.msg === "getTools") {
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+				let resp: any;
+				console.log(`got ${msg.msg}`);
+				const actions: {
+					title: string;
+					prompt: string;
+					id: string | number;
+				}[] = [];
+				const dbRequest = indexedDB.open("actions");
+				dbRequest.onerror = (event) => {
+					console.error("Error loading database.");
+				};
+				dbRequest.onsuccess = (event) => {
+					const db = dbRequest.result;
+					const objectStore = db.transaction("actions").objectStore("actions");
+					objectStore.openCursor().onsuccess = (event) => {
+						const cursor = (event.target as IDBRequest).result;
+						if (cursor) {
+							const { title, prompt, id } = cursor.value;
+							actions.push({ title, prompt, id });
+							cursor.continue(); // Continue to the next cursor
+						} else {
+							port.postMessage({ tools: JSON.stringify(actions) });
+						}
+					};
+				};
+			}
+		});
 	}
 });

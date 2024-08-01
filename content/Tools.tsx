@@ -9,18 +9,18 @@ export default function Tools() {
 		const fetchTools = async () => {
 			const actions: { title: string; prompt: string; id: string | number }[] =
 				[];
-			(async () => {
-				const response = await chrome.runtime.sendMessage({
-					msg: "getTools",
-				});
+			// biome-ignore lint/style/noVar: <explanation>
+			var port = chrome.runtime.connect({ name: "tools" });
+			port.postMessage({ msg: "getTools" });
+			port.onMessage.addListener((response) => {
 				const resp = JSON.parse(response.tools);
-				console.log(resp);
+
 				for (const tool of resp) {
 					setTools(actions); // Update state with fetched actions
 					const { title, prompt, id } = tool;
 					actions.push({ title, prompt, id });
 				}
-			})();
+			});
 		};
 		fetchTools();
 	}, []); // Run once on component mount
@@ -35,7 +35,7 @@ export default function Tools() {
 				title: title,
 				prompt: "do nothing",
 			});
-			console.log(response);
+
 			if (response.status === "success") {
 				alert(`action ${title} created succesfully`);
 			}

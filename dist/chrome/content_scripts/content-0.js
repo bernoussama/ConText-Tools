@@ -14,12 +14,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _public_react_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../public/react.png */ "./public/react.png");
-/* harmony import */ var _public_tailwind_bg_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../public/tailwind_bg.png */ "./public/tailwind_bg.png");
-/* harmony import */ var _public_typescript_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../public/typescript.png */ "./public/typescript.png");
-/* harmony import */ var _public_tailwind_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../public/tailwind.png */ "./public/tailwind.png");
-/* harmony import */ var _public_chromeWindow_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../public/chromeWindow.png */ "./public/chromeWindow.png");
-/* harmony import */ var _Tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Tools */ "./content/Tools.tsx");
+/* harmony import */ var _Tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Tools */ "./content/Tools.tsx");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 /* provided dependency */ var __react_refresh_error_overlay__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/overlay/index.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
@@ -28,14 +23,9 @@ var _jsxFileName = "/home/oussama/personal/sideklick-extension/content/ContentAp
   _s = __webpack_require__.$Refresh$.signature();
 
 
-
-
-
-
-
 function ContentApp() {
   _s();
-  const [isdialogOpen, setIsDialogOpen] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(true);
+  const [isdialogOpen, setIsDialogOpen] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(false);
   if (!isdialogOpen) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "mx-auto p-6",
@@ -47,7 +37,7 @@ function ContentApp() {
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       type: "button",
-      onClick: () => setIsDialogOpen(true),
+      onMouseDown: () => setIsDialogOpen(true),
       className: "bg-white rounded-md p-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
       __self: this,
       __source: {
@@ -65,167 +55,27 @@ function ContentApp() {
       lineNumber: 17,
       columnNumber: 10
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl lg:rounded-3xl md:pt-24 md:h-full sm:h-[100vh] lg:flex lg:gap-x-20 lg:px-24 lg:pt-0",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Tools__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 18,
       columnNumber: 4
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "absolute z-20 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19,
-      columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "w-[108rem] flex-none flex justify-end",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20,
-      columnNumber: 6
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("picture", {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21,
-      columnNumber: 7
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    src: _public_tailwind_bg_png__WEBPACK_IMPORTED_MODULE_2__,
-    alt: "",
-    className: "w-[90rem] flex-none max-w-none hidden dark:block",
-    decoding: "async",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22,
-      columnNumber: 8
-    }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "mx-auto max-w-md text-center lg:py-12 lg:mx-0 lg:flex-auto lg:text-left",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26,
-      columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex items-center justify-center space-x-4 my-4 mx-auto",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27,
-      columnNumber: 6
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    alt: "React logo",
-    src: _public_react_png__WEBPACK_IMPORTED_MODULE_1__,
-    className: "relative inline-block w-12",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28,
-      columnNumber: 7
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-3xl text-white",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29,
-      columnNumber: 7
-    }
-  }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    alt: "TypeScript logo",
-    src: _public_typescript_png__WEBPACK_IMPORTED_MODULE_3__,
-    className: "relative inline-block w-12",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30,
-      columnNumber: 7
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "text-3xl text-white",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 31,
-      columnNumber: 7
-    }
-  }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    alt: "Tailwind logo",
-    src: _public_tailwind_png__WEBPACK_IMPORTED_MODULE_4__,
-    className: "relative inline-block w-12",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 32,
-      columnNumber: 7
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-    className: "text-3xl font-bold tracking-tight text-white sm:text-4xl",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 34,
-      columnNumber: 6
-    }
-  }, "This is a content script running React, TypeScript, and Tailwind.css."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "mt-6 text-lg leading-8 text-gray-300",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 38,
-      columnNumber: 6
-    }
-  }, "Learn more about creating cross-browser extensions by", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "button" // {{ edit_1 }}
     ,
-    onClick: () => setIsDialogOpen(false),
+    onMouseDown: () => setIsDialogOpen(false),
     className: "underline hover:no-underline ",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40,
-      columnNumber: 7
-    }
-  }, "closing this hint"), ".")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "relative mt-16 h-80 lg:mt-8",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 48,
-      columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    className: "absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10",
-    src: _public_chromeWindow_png__WEBPACK_IMPORTED_MODULE_5__,
-    alt: "Chrome window screenshot",
-    width: "1824",
-    height: "1080",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 49,
-      columnNumber: 6
-    }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Tools__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 52,
+      lineNumber: 20,
       columnNumber: 4
     }
-  }));
+  }, "closing this hint"));
 }
-_s(ContentApp, "FnvMD/HxflKZSZIcS7nqeffw3U0=");
+_s(ContentApp, "7F8Ja6LuF3zLmhOTD96l7L0RD/U=");
 _c = ContentApp;
 var _c;
 __webpack_require__.$Refresh$.register(_c, "ContentApp");
@@ -290,12 +140,15 @@ function Tools() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const fetchTools = async () => {
       const actions = [];
-      (async () => {
-        const response = await chrome.runtime.sendMessage({
-          msg: "getTools"
-        });
+      // biome-ignore lint/style/noVar: <explanation>
+      var port = chrome.runtime.connect({
+        name: "tools"
+      });
+      port.postMessage({
+        msg: "getTools"
+      });
+      port.onMessage.addListener(response => {
         const resp = JSON.parse(response.tools);
-        console.log(resp);
         for (const tool of resp) {
           setTools(actions); // Update state with fetched actions
           const {
@@ -309,7 +162,7 @@ function Tools() {
             id
           });
         }
-      })();
+      });
     };
     fetchTools();
   }, []); // Run once on component mount
@@ -323,7 +176,6 @@ function Tools() {
         title: title,
         prompt: "do nothing"
       });
-      console.log(response);
       if (response.status === "success") {
         alert(`action ${title} created succesfully`);
       }
@@ -334,7 +186,7 @@ function Tools() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54,
+      lineNumber: 56,
       columnNumber: 10
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
@@ -342,7 +194,7 @@ function Tools() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55,
+      lineNumber: 57,
       columnNumber: 4
     }
   }, "Tools"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -350,7 +202,7 @@ function Tools() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56,
+      lineNumber: 58,
       columnNumber: 4
     }
   }, tools.length > 0 && tools.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -359,7 +211,7 @@ function Tools() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57,
+      lineNumber: 59,
       columnNumber: 44
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -367,7 +219,7 @@ function Tools() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58,
+      lineNumber: 60,
       columnNumber: 8
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
@@ -375,7 +227,7 @@ function Tools() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59,
+      lineNumber: 61,
       columnNumber: 9
     }
   }, item.title))))));
@@ -43129,61 +42981,6 @@ module.exports = "data:image/svg+xml,%3Csvg width=%2724%27 height=%2724%27 strok
 
 /***/ }),
 
-/***/ "./public/chromeWindow.png":
-/*!*********************************!*\
-  !*** ./public/chromeWindow.png ***!
-  \*********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "web_accessible_resources/resource-0/chromeWindow.png";
-
-/***/ }),
-
-/***/ "./public/react.png":
-/*!**************************!*\
-  !*** ./public/react.png ***!
-  \**************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "web_accessible_resources/resource-0/react.png";
-
-/***/ }),
-
-/***/ "./public/tailwind.png":
-/*!*****************************!*\
-  !*** ./public/tailwind.png ***!
-  \*****************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "web_accessible_resources/resource-0/tailwind.png";
-
-/***/ }),
-
-/***/ "./public/tailwind_bg.png":
-/*!********************************!*\
-  !*** ./public/tailwind_bg.png ***!
-  \********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "web_accessible_resources/resource-0/tailwind_bg.png";
-
-/***/ }),
-
-/***/ "./public/typescript.png":
-/*!*******************************!*\
-  !*** ./public/typescript.png ***!
-  \*******************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "web_accessible_resources/resource-0/typescript.png";
-
-/***/ }),
-
 /***/ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/client/ErrorOverlayEntry.js":
 /*!***************************************************************************************!*\
   !*** ./node_modules/@pmmmwh/react-refresh-webpack-plugin/client/ErrorOverlayEntry.js ***!
@@ -51532,7 +51329,7 @@ class GoogleGenerativeAI {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("d58d2803929cab53656e")
+/******/ 		__webpack_require__.h = () => ("fc20099f1d906ee9c636")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
