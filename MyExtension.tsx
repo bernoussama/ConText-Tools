@@ -85,9 +85,8 @@ export default function MyExtension() {
 						Save
 					</button>
 				</div>
-				<div className="divider" />
-				{/* <CustomMenus /> */}
-				<Tools />
+				{/* <div className="divider" /> */}
+				{/* <Tools /> */}
 			</div>
 		</div>
 	);
