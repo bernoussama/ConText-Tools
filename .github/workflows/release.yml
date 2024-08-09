@@ -1,7 +1,7 @@
 name: Release extension
 on:
   push:
-    # branches: [ main ]
+    branches: [ main ]
     tags:
       - "*"
 jobs:
