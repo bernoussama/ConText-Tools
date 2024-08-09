@@ -1,9 +1,8 @@
 name: Release extension
 on:
   push:
-    branches: [ main ]
     tags:
-      - "*"
+      - "v*.*.*"
 jobs:
   build-extension:
     runs-on: ubuntu-latest
