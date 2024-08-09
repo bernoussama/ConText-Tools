@@ -32,7 +32,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 		});
 	});
 });
-chrome.runtime.onStartup(() => {});
+// chrome.runtime.onStartup(() => {});
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
 	const menuItem =
