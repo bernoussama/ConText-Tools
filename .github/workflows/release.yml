@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/build extension
+      - uses: ./.github/actions/build\ extension
 
   upload-extension:
     runs-on: ubuntu-latest
