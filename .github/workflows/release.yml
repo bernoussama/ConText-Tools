@@ -1,7 +1,6 @@
 name: Release extension
 on:
   push:
-    branches: [ main ]
     tags:
       - "v*.*.*"
 jobs:
@@ -13,6 +12,7 @@ jobs:
 
   upload-extension:
     runs-on: ubuntu-latest
+    needs: build-extension
     permissions:
       contents: write
     steps:
