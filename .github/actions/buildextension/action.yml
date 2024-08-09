@@ -14,7 +14,7 @@ runs:
 
     - name: Build extension
       run: bun run build
-      working-directory: apps/extension
+      working-directory: ./
       shell: bash
 
     - name: Pack extension for chrome
