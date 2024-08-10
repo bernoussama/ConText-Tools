@@ -84,6 +84,19 @@ export default function MyExtension() {
 					>
 						Save
 					</button>
+
+					<span className="text-sm text-gray-500 mt-2">
+						You can get your API key in your{" "}
+						<a
+							href="https://aistudio.google.com/app/apikey"
+							target="_blank"
+							rel="noreferrer"
+							className="text-secondary-content"
+						>
+							Gemini API Keys
+						</a>{" "}
+						page.
+					</span>
 				</div>
 				{/* <div className="divider" /> */}
 				{/* <Tools /> */}
