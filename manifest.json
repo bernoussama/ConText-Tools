@@ -1,6 +1,6 @@
 {
 	"manifest_version": 3,
-	"version": "0.1",
+	"version": "0.2",
 	"name": "ConText tools",
 	"description": "A browser extension offering a suite of text manipulation tools accessible via the context menu.",
 	"background": {
