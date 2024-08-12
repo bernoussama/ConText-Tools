@@ -15,10 +15,9 @@
 
 ---
 
-<p align="center">
+
 ConText Tools is a Chrome extension designed to enhance your writing experience by providing a suite of powerful tools accessible with just a right-click. It streamlines the process of editing and refining text directly within your browser, making it a breeze to improve your work without interrupting your flow while also keeping your unique writing style if you want. The integration with the Gemini API is key to its functionality; when you select text, it gets sent to the Gemini API along with a system prompt that specifies the desired action, such as proofreading or making the text more concise and much more.
-    <br> 
-</p>
+<br> 
 
 ---
 
