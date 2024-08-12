@@ -38,7 +38,7 @@ ConText Tools is a Chrome extension designed to enhance your writing experience 
 
 
 ## 💻 Installation <a name = "installation"></a>
-1. download the latest `conteText_Tools.zip` file in releases.
+1. download the latest `conteText_Tools.zip`  file in [releases](https://github.com/0ussamaBernou/ConText-Tools/releases).
 2. unzip it
 3. Open Chrome and type `chrome://extensions` in the address bar.
 4. In the top right corner, enable Developer Mode by toggling the switch.
