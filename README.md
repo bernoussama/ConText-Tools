@@ -5,8 +5,9 @@
   [![Status](https://img.shields.io/badge/status-active-success.svg)]() 
   [![GitHub Issues](https://img.shields.io/github/issues/0ussamaBernou/ConText-Tools.svg)](https://github.com/0ussamaBernou/ConText-Tools/issues)
   [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/0ussamaBernou/ConText-Tools.svg)](https://github.com/0ussamaBernou/ConText-Tools/pulls)
-  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
-
+  <!-- [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt) -->
+  [![MIT License][license-shield]][license-url]
+  
 </div>
 
 ## Demo
@@ -22,6 +23,7 @@ ConText Tools is a Chrome extension designed to enhance your writing experience 
 ---
 
 ## 📝 Table of Contents
+- [Installation](#installation)
 - [Problem Statement](#problem_statement)
 - [Idea / Solution](#idea)
 - [Dependencies / Limitations](#limitations)
@@ -32,6 +34,8 @@ ConText Tools is a Chrome extension designed to enhance your writing experience 
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
+
+- ## 💻 Installation <a name = "installation"></a>
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
 - IDEAL: The desired state for the Chrome extension is a seamless context menu that provides users with a variety of writing tools when they select text. This menu would include options for grammar checks, synonym suggestions, text summarization, and direct integration with popular writing platforms. The result would enhance user productivity by allowing quick access to essential writing tools without needing to switch applications.
@@ -101,6 +105,7 @@ These limitations highlight areas that warrant further investigation. Future res
 
 By addressing these areas, we can enhance the extension's functionality and ensure a more seamless user experience moving forward.
 
+
 ## 🏁 Getting Started <a name = "getting_started"></a> 
 These instructions will get you a copy of the project up and running on your local machine for development 
 and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
@@ -125,6 +130,19 @@ npm -v # should print `10.8.1`
 for more info check out the official website of bun and node.js :
 - [Bun](https://bun.sh/) 
 - [NodeJs](https://nodejs.org/en/)
+
+### Setup
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/0ussamaBernou/ConText-Tools
+   ```
+
+2. Navigate to the project directory and install dependencies:
+
+   ```bash
+   bun install #or npm install
+   ```
 
 ### Scripts Available
 
@@ -151,30 +169,32 @@ bun run start #or npm run start
 
 ## 📤 Deployment <a name="deployment"></a>
 
-#### Production build
+### Production build
 
 ```bash
 # Builds the app for production.
 # Bundles your browser extension in production mode for the target browser.
 bun run build #or npm run build
 ```
-To install the "conText_Tools" extension from GitHub, follow these steps:
 
-Open Chrome and type `chrome://extensions` in the address bar.
-In the top right corner, enable Developer Mode by toggling the switch.
-Click on the "Load unpacked" button that appears in the top left corner.
-Select the `dist/chrome` extension folder inside the cloned repo, and the extension will be installed.
-
+### Adding Extension to Chrome <a name="install"></a>
+1. Open Chrome and type `chrome://extensions` in the address bar.
+2. In the top right corner, enable Developer Mode by toggling the switch.
+3. Click on the "Load unpacked" button that appears in the top left corner.
+4. Select the `dist/chrome` folder from the cloned repository. and the extension will be installed.
 That's it! You should now see the extension in your Chrome browser.
+
 
 ## 🎈 Usage <a name="usage"></a>
 Select text you want to edit, right click on the selection hover over "ConText Tools" and choose from the provided tools 
+
 
 ## ⛏️ Built With <a name = "tech_stack"></a>
 - [Extension.js](https://extension.js.org) -  Extension development tool
 - [React](https://react.dev/) - Web Library
 - [Bun](https://bun.sh/) - Dev environment
 - [NodeJs](https://nodejs.org/en/) - Dev Environment
+
 
 ## ✍️ Authors <a name = "authors"></a>
 - [@0ussamaBernou](https://github.com/0ussamaBernou) - Idea & Initial work
@@ -189,3 +209,8 @@ who participated in this project.
 > This project was bootstrapped using the Extension.js React-TypeScript template.
 You can learn more in the [Extension.js](https://extension.js.org) documentation.
 - https://github.com/race2infinity/The-Documentation-Compendium
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[license-shield]: https://img.shields.io/github/license/0ussamaBernou/ConText-Tools?color=blue
+[license-url]: LICENSE.txt
