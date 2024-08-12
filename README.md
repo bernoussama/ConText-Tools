@@ -6,7 +6,8 @@
   [![GitHub Issues](https://img.shields.io/github/issues/0ussamaBernou/ConText-Tools.svg)](https://github.com/0ussamaBernou/ConText-Tools/issues)
   [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/0ussamaBernou/ConText-Tools.svg)](https://github.com/0ussamaBernou/ConText-Tools/pulls)
   [![MIT License][license-shield]][license-url]
-    <!-- [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt) -->
+  <!-- [![Sponsors][sponsors-shield]][sponsors-url] -->
+  <!-- [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt) -->
 </div>
 
 ## Demo
@@ -222,3 +223,5 @@ You can learn more in the [Extension.js](https://extension.js.org) documentation
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [license-shield]: https://img.shields.io/github/license/0ussamaBernou/ConText-Tools?color=blue
 [license-url]: LICENSE.txt
+[sponsors-shield]: https://img.shields.io/github/sponsors/0ussamaBernou
+[sponsors-url]: https://github.com/sponsors/0ussamaBernou
