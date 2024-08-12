@@ -1,4 +1,4 @@
-<h2 align="center">ConText Tools</h2>
+<h1 align="center">ConText Tools</h1>
 
 <div align="center">
 
