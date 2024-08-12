@@ -34,7 +34,9 @@ ConText Tools is a Chrome extension designed to enhance your writing experience 
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgments)
 
-- ## 💻 Installation <a name = "installation"></a>
+
+## 💻 Installation <a name = "installation"></a>
+
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
 - IDEAL: The desired state for the Chrome extension is a seamless context menu that provides users with a variety of writing tools when they select text. This menu would include options for grammar checks, synonym suggestions, text summarization, and direct integration with popular writing platforms. The result would enhance user productivity by allowing quick access to essential writing tools without needing to switch applications.
