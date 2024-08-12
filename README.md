@@ -5,9 +5,8 @@
   [![Status](https://img.shields.io/badge/status-active-success.svg)]() 
   [![GitHub Issues](https://img.shields.io/github/issues/0ussamaBernou/ConText-Tools.svg)](https://github.com/0ussamaBernou/ConText-Tools/issues)
   [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/0ussamaBernou/ConText-Tools.svg)](https://github.com/0ussamaBernou/ConText-Tools/pulls)
-  <!-- [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt) -->
   [![MIT License][license-shield]][license-url]
-  
+    <!-- [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt) -->
 </div>
 
 ## Demo
