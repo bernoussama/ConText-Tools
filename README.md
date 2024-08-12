@@ -6,6 +6,8 @@
   [![GitHub Issues](https://img.shields.io/github/issues/0ussamaBernou/ConText-Tools.svg)](https://github.com/0ussamaBernou/ConText-Tools/issues)
   [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/0ussamaBernou/ConText-Tools.svg)](https://github.com/0ussamaBernou/ConText-Tools/pulls)
   [![MIT License][license-shield]][license-url]
+  [![Downloads](https://img.shields.io/github/downloads/0ussamaBernou/ConText-Tools/total)](https://github.com/0ussamaBernou/ConText-Tools/releases)
+
   <!-- [![Sponsors][sponsors-shield]][sponsors-url] -->
   <!-- [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt) -->
 </div>
