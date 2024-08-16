@@ -18,8 +18,8 @@
 		"default_icon": {}
 	},
 	"icons": {
-		"16": "public/icon/icon_16.png",
-		"48": "public/icon/icon_48.png"
+		"48": "public/icon/icon_48.png",
+		"128": "public/icon/icon_128.png"
 	},
 	"web_accessible_resources": [
 		{
