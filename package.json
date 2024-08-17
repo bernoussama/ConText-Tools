@@ -12,12 +12,12 @@
 		"typescript": "5.3.3"
 	},
 	"scripts": {
-		"dev": "extension dev",
-		"start": "extension start",
-		"build": "extension build",
+		"dev": "tailwindcss -i ./input.css -o output.css && extension dev",
+		"start": "tailwindcss -i ./input.css -o output.css && extension start",
+		"build": "tailwindcss -i ./input.css -o output.css && extension build",
 		"style": "tailwindcss -i ./input.css -o output.css --watch"
 	},
-	"name": "sideklick-extension",
+	"name": "ConText-Tools",
 	"private": true,
-	"version": "0.0.0"
+	"version": "0.2.0"
 }
