@@ -15,7 +15,7 @@ export async function promptGemini(
 			const apiKey: string = result.apiKey;
 			if (!apiKey) {
 				console.error("API key is not set");
-				// resolve(""); // Return empty string if no API key
+				alert("Context Tools: Gemini API key is not set, please set it in the extension popup");
 				return;
 			}
 			const safetySettings = [
