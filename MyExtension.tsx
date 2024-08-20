@@ -99,7 +99,7 @@ export default function MyExtension() {
 					</span>
 				</div>
 				{/* <div className="divider" /> */}
-				{/* <Tools /> */}
+				{<Tools />}
 			</div>
 		</div>
 	);

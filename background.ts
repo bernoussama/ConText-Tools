@@ -20,10 +20,10 @@ const stringTools: {
 	title: string;
 	systemPrompt: string | undefined;
 }[] = [
-	{ id: "uppercase", title: "Uppercase", systemPrompt: undefined },
-	{ id: "lowercase", title: "Lowercase", systemPrompt: undefined },
-	{ id: "capitalize", title: "Capitalize", systemPrompt: undefined },
-];
+		{ id: "uppercase", title: "Uppercase", systemPrompt: undefined },
+		{ id: "lowercase", title: "Lowercase", systemPrompt: undefined },
+		{ id: "capitalize", title: "Capitalize", systemPrompt: undefined },
+	];
 
 const customMenus: CustomMenu[] = [];
 
@@ -69,6 +69,32 @@ const builtinTools: Tool[] = [
 	friendly,
 	concise,
 ];
+
+const customTools = getTools();
+console.log("customTools: ", customTools);
+function getTools() {
+
+	const actions: { title: string; systemPrompt: string; id: string | number }[] =
+		[];
+	const dbRequest = indexedDB.open("actions");
+	dbRequest.onerror = (event) => {
+		alert("Error loading database.");
+	};
+	dbRequest.onsuccess = (event) => {
+		const db = dbRequest.result;
+		const objectStore = db.transaction("actions").objectStore("actions");
+		objectStore.openCursor().onsuccess = (event) => {
+			const cursor = (event.target as IDBRequest).result;
+			if (!cursor) {
+				return;
+			}
+			const { title, prompt, id } = cursor.value;
+			actions.push({ title, systemPrompt: prompt, id });
+			cursor.continue(); // Continue to the next cursor
+		};
+	};
+	return actions;
+}
 
 chrome.runtime.onInstalled.addListener((details) => {
 	console.log("onInstalled triggered");
@@ -117,6 +143,22 @@ chrome.runtime.onInstalled.addListener((details) => {
 			contexts: ["selection"],
 		});
 	}
+	for (const tool of customTools) {
+		console.log("tool: ", tool);
+		tool.id = tool.id.toString();
+		try {
+			chrome.contextMenus.create({
+				id: tool.id,
+				parentId: "ConTextParent",
+				title: tool.title,
+				contexts: ["selection"],
+			});
+
+		} catch (e) {
+			console.error("error creating custom tool: ", e);
+			continue;
+		}
+	}
 
 	// const [tab] = await chrome.tabs.query({
 	// 		(async () => {
@@ -133,26 +175,51 @@ chrome.runtime.onInstalled.addListener((details) => {
 // chrome.runtime.onStartup(() => {});
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-	const menuItem =
+	let menuItem =
 		stringTools.find((menu) => menu.id === info.menuItemId) ||
 		builtinTools.find((menu) => menu.id === info.menuItemId);
-	if (menuItem) {
-		if (tab && tab.id !== undefined) {
-			(async () => {
-				const [tab] = await chrome.tabs.query({
-					active: true,
-					lastFocusedWindow: true,
-				});
-				const response = await chrome.tabs.sendMessage(tab.id || 0, {
-					menuId: menuItem.id,
-					menuTitle: menuItem.title,
-					menuPrompt: menuItem.systemPrompt,
-				});
-				// do something with response here, not outside the function
-				console.log(response);
-			})();
+	if (!menuItem) {
+
+		const dbRequest = indexedDB.open("actions");
+		dbRequest.onerror = (event) => {
+			alert("Error loading database.");
+		};
+		dbRequest.onsuccess = (event) => {
+			const db = dbRequest.result;
+			const transaction = db.transaction(["actions"]);
+			const objectStore = transaction.objectStore("actions");
+			const request = objectStore.get(info.menuItemId);
+			request.onerror = (event) => {
+				alert("Error loading database.");
+			};
+			request.onsuccess = (event) => {
+				// Do something with the request.result!
+				//
+				console.log(request.result);
+				const { title, prompt, id } = request.result;
+				menuItem = { title, systemPrompt: prompt, id };
+			};
 		}
 	}
+	// if (menuItem) {
+	console.log("menuItem: ", menuItem);
+	if (tab && tab.id !== undefined) {
+		(async () => {
+			const [tab] = await chrome.tabs.query({
+				active: true,
+				lastFocusedWindow: true,
+			});
+			console.log("sending message to", tab);
+			const response = await chrome.tabs.sendMessage(tab.id || 0, {
+				menuId: menuItem.id,
+				menuTitle: menuItem.title,
+				menuPrompt: menuItem.systemPrompt,
+			});
+			// do something with response here, not outside the function
+			console.log(response);
+		})();
+	}
+	// }
 });
 
 // create custom tool
